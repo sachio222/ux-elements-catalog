@@ -1,8 +1,16 @@
 # UX elements catalog
 
-Plan every page of a website or mobile app before you design it, then hand that plan to your design or coding tool to make the designs.
+Know exactly what goes on every page of your website or mobile app before anyone designs it.
 
-This is a skill for AI coding agents such as Claude Code. You point it at your app's code or at a product plan. It writes down, page by page, what a visitor wants to do there and every element that helps them: buttons, form fields, sections of text, error messages and ways back out. Each page gets one primary button. From that list it works out every component your UI kit needs (a UI kit is the shared set of buttons, fields, menus and other parts every page is built from). You read it all on one web page, then give it to whatever makes your designs.
+| | |
+|---|---|
+| **You give it** | Your app's code, or a description of the app you want to build. |
+| **You get back** | One web page listing every page or screen of your app. For each one: what a visitor wants to do there, every button, field, text block and error message it needs in order, and which button is the main one. Plus a list of every component your UI kit needs. |
+| **Then you** | Hand that list to your design or coding tool, and it designs each page from it. |
+
+For example, a sign-up page comes back as: title "Create your account", an email field, a password field, a "Create account" button (the main one), and what happens when things go wrong: "That email already has an account" with a link to sign in, and "Use at least 8 characters" under the password field.
+
+This is a skill for AI coding agents such as Claude Code: a folder of instructions your agent follows. A UI kit is the shared set of buttons, fields, menus and other parts every page is built from.
 
 ## Install
 

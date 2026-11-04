@@ -1,0 +1,131 @@
+{
+  "meta": {
+    "product": "Acme Notes",
+    "title": "Acme Notes UX elements catalog",
+    "file": "UX-ELEMENTS-CATALOG",
+    "updated": "2026-11-03",
+    "status": "Starter example. Replace every value with your own product's.",
+    "purpose": "This catalog lists what a person reads and does on each page of Acme Notes, so layout and visual design start from an agreed list.",
+    "main_message": "Every page has one primary call to action, and it serves the visitor's main goal on that page.",
+    "reading": "Read the sitemap first, then each page from the top. Rows in an element table follow the page's reading order.",
+    "tracking_note": "Every interactive element sends the analytics event named in its row.",
+    "owner": "the product owner",
+    "mode": "plan",
+    "top_terms": ["Call to action (CTA)", "Primary CTA", "User story", "Needs chain", "Fake door"],
+    "no_dashes": false
+  },
+  "terms": [
+    ["Call to action (CTA)", "A button or link that asks the person to take a step."],
+    ["Primary CTA", "The one step a page exists to get. Each page has exactly one."],
+    ["User story", "What a visitor wants on a page, written as \"As a [role], I want to [goal].\""],
+    ["Needs chain", "The steps a visitor takes toward a goal, each ending in the elements that meet it."],
+    ["Fake door", "A button for something not built yet. The click says so and offers a real next step."]
+  ],
+  "sources": [
+    ["PLAN", "Product plan (replace with your file name and section numbers)."],
+    ["APP", "Existing app code, if there is one."]
+  ],
+  "source_events": ["signup_started", "signup_completed"],
+  "sitemap": [
+    {
+      "group": "Public pages",
+      "pages": [
+        {"path": "/", "name": "Home", "page": "HOME", "depth": 0, "audience": "First-time visitors", "job": "Explain the product and start a free account", "state": "build", "when": "Launch"},
+        {"path": "/signup", "name": "Sign up", "page": "SIGN", "depth": 1, "audience": "Visitors ready to try it", "job": "Create an account", "state": "build", "when": "Launch"},
+        {"path": "/pricing", "name": "Pricing", "page": null, "depth": 1, "audience": "Visitors comparing tools", "job": "Show plans and prices", "state": "later", "when": "After launch"}
+      ]
+    }
+  ],
+  "global": {
+    "groups": [{"name": "Header", "ids": ["GLB-01", "GLB-02"]}],
+    "elements": [
+      {"id": "GLB-01", "el": "Logo", "label": "Acme Notes", "lab": "source", "type": "navigation", "does": "Clicks the logo", "then": "Goes to Home", "event": "nav_logo", "state": "build", "src": "PLAN 1"},
+      {"id": "GLB-02", "el": "Sign in link", "label": "Sign in", "lab": "proposed", "type": "link", "kit": "Text link", "does": "Clicks Sign in", "then": "Opens the sign-in page", "event": "nav_signin", "state": "build", "src": "PLAN 1"}
+    ],
+    "stories": [
+      {"id": "GLB-G1", "story": "As a visitor, I want to get home or sign in from any page.", "src": "PLAN 1", "chain": [
+        {"d": 0, "to": "get back to the start", "need": "a logo that links home", "els": ["GLB-01"]},
+        {"d": 0, "to": "get back to my notes", "need": "a sign-in link", "els": ["GLB-02"]}
+      ]}
+    ]
+  },
+  "pages": [
+    {
+      "id": "HOME", "name": "Home", "path": "/", "group": "Public pages",
+      "audience": "First-time visitors", "job": "Explain the product and start a free account",
+      "state": "build", "when": "Launch", "primary": "HOME-03", "shells": ["Header"],
+      "stories": [
+        {"id": "HOME-G1", "main": true, "story": "As a first-time visitor, I want to understand what Acme Notes does and try it.", "src": "PLAN 2", "chain": [
+          {"d": 0, "to": "understand what it is", "need": "a title and a one-line subtitle", "els": ["HOME-01", "HOME-02"]},
+          {"d": 1, "to": "picture using it", "need": "a section on what I can do with it", "els": ["HOME-04"]},
+          {"d": 0, "to": "try it", "need": "a button that starts a free account", "els": ["HOME-03"]}
+        ]},
+        {"id": "HOME-G2", "story": "As a visitor comparing tools, I want to see what it costs.", "src": "PLAN 3", "chain": [
+          {"d": 0, "to": "compare prices", "need": "a link to pricing", "els": ["HOME-05"]}
+        ]}
+      ],
+      "elements": [
+        {"id": "HOME-01", "el": "Title", "label": "Notes that find themselves", "lab": "proposed", "type": "content", "sub": "title", "does": "Reads", "then": "Nothing", "event": "none", "state": "build", "src": "PLAN 2"},
+        {"id": "HOME-02", "el": "Subtitle", "label": "Write anything. Search by what you meant.", "lab": "proposed", "type": "content", "sub": "subtitle", "does": "Reads", "then": "Nothing", "event": "none", "state": "build", "src": "PLAN 2"},
+        {"id": "HOME-03", "el": "Start button", "label": "Start free", "lab": "source", "type": "primary", "does": "Clicks Start free", "then": "Opens Sign up", "event": "signup_started", "state": "build", "src": "PLAN 2"},
+        {"id": "HOME-04", "el": "Section: what you can do", "label": "Write, tag, search", "lab": "proposed", "type": "content", "sub": "section", "does": "Reads", "then": "Nothing", "event": "none", "state": "build", "src": "PLAN 2"},
+        {"id": "HOME-05", "el": "Pricing link", "label": "See pricing", "lab": "proposed", "type": "secondary", "does": "Clicks See pricing", "then": "Fake door: says pricing comes after launch and offers Start free", "event": "pricing_clicked", "state": "fakedoor", "src": "PLAN 3"}
+      ],
+      "ways_out": {
+        "back": {"v": "n/a", "els": [], "note": "First page of the site."},
+        "cancel": {"v": "n/a", "els": [], "note": "Nothing to cancel."},
+        "undo": {"v": "n/a", "els": [], "note": "Nothing to undo."},
+        "help": {"v": "no", "els": [], "note": "No help or contact link yet."},
+        "keep": {"v": "n/a", "els": [], "note": "No work on this page."}
+      },
+      "notes": ""
+    },
+    {
+      "id": "SIGN", "name": "Sign up", "path": "/signup", "group": "Public pages",
+      "audience": "Visitors ready to try it", "job": "Create an account",
+      "state": "build", "when": "Launch", "primary": "SIGN-04", "shells": ["Header"],
+      "stories": [
+        {"id": "SIGN-G1", "main": true, "story": "As a new visitor, I want to create an account quickly.", "src": "PLAN 4", "chain": [
+          {"d": 0, "to": "know I'm in the right place", "need": "a title", "els": ["SIGN-01"]},
+          {"d": 0, "to": "make an account", "need": "an email field, a password field and a button", "els": ["SIGN-02", "SIGN-03", "SIGN-04"]}
+        ]},
+        {"id": "SIGN-G2", "path": "unhappy", "story": "As a visitor who already has an account, I want to get in without starting over.", "src": "PLAN 4", "chain": [
+          {"d": 0, "to": "understand what went wrong", "need": "a message that says the email has an account", "els": ["SIGN-06"]},
+          {"d": 0, "to": "get in", "need": "a way to sign in or reset my password", "els": ["SIGN-05", "SIGN-07"]}
+        ]},
+        {"id": "SIGN-G3", "path": "unhappy", "story": "As a visitor whose password was refused, I want to fix it without retyping my email.", "src": "PLAN 4", "chain": [
+          {"d": 0, "to": "fix it", "need": "a message that names the rule, with my email kept", "els": ["SIGN-08"]}
+        ]}
+      ],
+      "elements": [
+        {"id": "SIGN-01", "el": "Title", "label": "Create your account", "lab": "proposed", "type": "content", "sub": "title", "does": "Reads", "then": "Nothing", "event": "none", "state": "build", "src": "PLAN 4"},
+        {"id": "SIGN-02", "el": "Email field", "label": "Email", "lab": "source", "type": "input", "does": "Types an email address", "then": "Checked when the form is sent", "event": "none", "state": "build", "src": "PLAN 4"},
+        {"id": "SIGN-03", "el": "Password field", "label": "Password", "lab": "source", "type": "input", "does": "Types a password", "then": "Checked when the form is sent", "event": "none", "state": "build", "src": "PLAN 4"},
+        {"id": "SIGN-04", "el": "Create account button", "label": "Create account", "lab": "source", "type": "primary", "does": "Clicks Create account", "then": "Account created; opens an empty notebook", "event": "signup_completed", "state": "build", "src": "PLAN 4"},
+        {"id": "SIGN-05", "el": "Sign in link", "label": "Already have an account? Sign in", "lab": "proposed", "type": "link", "kit": "Text link", "does": "Clicks Sign in", "then": "Opens sign-in with the email filled in", "event": "signup_to_signin", "state": "build", "src": "PLAN 4"},
+        {"id": "SIGN-06", "el": "Existing account error", "label": "That email already has an account.", "lab": "proposed", "type": "error", "path": "unhappy", "trigger": "The email matches an existing account", "does": "Reads", "then": "Shows under the email field", "event": "signup_error_exists", "state": "build", "src": "PLAN 4", "wayout": ["SIGN-05", "SIGN-07"]},
+        {"id": "SIGN-07", "el": "Reset password link", "label": "Reset your password", "lab": "proposed", "type": "wayout", "path": "unhappy", "trigger": "Shown with the existing account error", "does": "Clicks Reset your password", "then": "Sends a reset link to that email", "event": "signup_reset", "state": "build", "src": "PLAN 4"},
+        {"id": "SIGN-08", "el": "Password rule error", "label": "Use at least 8 characters.", "lab": "proposed", "type": "error", "path": "unhappy", "trigger": "The password is shorter than 8 characters", "does": "Reads", "then": "Shows under the password field; the email stays filled in", "event": "signup_error_password", "state": "build", "src": "PLAN 4", "wayout": ["SIGN-03"]}
+      ],
+      "ways_out": {
+        "back": {"v": "yes", "els": ["GLB-01"], "note": ""},
+        "cancel": {"v": "n/a", "els": [], "note": "Nothing is saved until the account is created."},
+        "undo": {"v": "n/a", "els": [], "note": "Nothing to undo."},
+        "help": {"v": "no", "els": [], "note": "No help or contact link yet."},
+        "keep": {"v": "yes", "els": ["SIGN-08"], "note": "Entries stay filled in after an error."}
+      },
+      "notes": ""
+    }
+  ],
+  "index": [
+    {"intent": "Sign up", "goals": [{"text": "Start a free account", "stories": ["HOME-G1", "SIGN-G1"]}]},
+    {"intent": "Recover when something goes wrong", "goals": [
+      {"text": "Get in with an existing account", "stories": ["SIGN-G2"]},
+      {"text": "Fix a refused password", "stories": ["SIGN-G3"]}
+    ]}
+  ],
+  "open_questions": [
+    {"id": "Q1", "topic": "Free plan limit", "q": "How many notes does the free plan allow?", "status": "open", "recommended": "Unlimited notes on one device, so the first week has no limit to hit.", "src": "PLAN 3", "pages": ["HOME"]},
+    {"id": "Q2", "topic": "Password rule", "q": "The plan names no password rule.", "status": "default", "default": "At least 8 characters, no other rules.", "reason": "NIST SP 800-63B sets 8 characters as the minimum and advises against composition rules.", "src": "PLAN 4", "pages": ["SIGN"]}
+  ]
+}
